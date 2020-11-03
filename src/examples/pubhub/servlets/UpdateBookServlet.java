@@ -1,6 +1,8 @@
 package examples.pubhub.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,9 +52,13 @@ public class UpdateBookServlet extends HttpServlet {
 			String message = book.getTitle()+" updated successfully";
 			String messageClass = "alert-success";
 			String[] tags = request.getParameter("tags").split(",");
+			ArrayList<Tag> previousTags = tagsDB.getTagsByBook(book);
 			
+			boolean hasPreviousTags = (previousTags.size() > 0);
 			boolean areRemoved = tagsDB.removePreviousTags(isbn13);
-			if (areRemoved) {
+			
+			//Each one of these conditions must be true if the other is false. 
+			if (areRemoved ^ !hasPreviousTags) {
 				for (String str : tags) {
 					
 					Tag tag = new Tag(isbn13, str);
