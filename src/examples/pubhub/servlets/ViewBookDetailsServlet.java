@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import examples.pubhub.dao.BookDAO;
 import examples.pubhub.dao.TagDAO;
 import examples.pubhub.model.Book;
-import examples.pubhub.model.Tag;
 import examples.pubhub.utilities.DAOUtilities;
 
 /**
@@ -36,6 +35,7 @@ public class ViewBookDetailsServlet extends HttpServlet {
 		// Otherwise it won't know what details to display. Ergo, we need to fetch those details before we
 		// Actually redirect the user.
 		String isbn13 = request.getParameter("isbn13");
+		String tags = "";
 		
 		BookDAO bookDAO = DAOUtilities.getBookDAO();
 		Book book = bookDAO.getBookByISBN(isbn13);
@@ -44,14 +44,17 @@ public class ViewBookDetailsServlet extends HttpServlet {
 		TagDAO tagDAO = DAOUtilities.getTagDAO();
 		ArrayList<String> tagList = tagDAO.getTagsByBook(book);
 		
-		StringBuffer sb = new StringBuffer();
+		if (tagList.size() > 0) {
 		
-		for (String str : tagList) {
-	         sb.append(str);
-	         sb.append(", ");
-	      }
-		//print tag names and remove last appendage;
-		String tags = sb.toString().substring(0, sb.length() - 2); 
+			StringBuffer sb = new StringBuffer();
+			
+			for (String str : tagList) {
+		         sb.append(str);
+		         sb.append(", ");
+		      }
+			//print tag names and remove last appendage;
+			tags += sb.toString().substring(0, sb.length() - 2); 
+		}
 		
 		request.setAttribute("book", book);
 		request.setAttribute("tags", tags);

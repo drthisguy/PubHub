@@ -101,7 +101,6 @@ public class PublishBookServlet extends HttpServlet {
 					if (!tagAdded) {
 						message = "Book published. However, adding one or more tags may have failed";
 						messageClass = "alert-warning";
-						break;
 					}
 				}
 						

@@ -55,6 +55,24 @@ public class TagDAOImpl implements TagDAO {
             closeResources();
         }
     }
+    
+    public boolean removePreviousTags(String ISBN13) {
+        try {
+            connection = DAOUtilities.getConnection();
+            String sql = "DELETE FROM book_tags WHERE isbn_13=?";
+            stmt = connection.prepareStatement(sql);
+
+            stmt.setString(1, ISBN13);
+
+            return stmt.executeUpdate() != 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            closeResources();
+        }
+    }
 
     @Override
     public ArrayList<String> getTagsByBook(Book book) {

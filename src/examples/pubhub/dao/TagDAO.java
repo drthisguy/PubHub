@@ -10,6 +10,8 @@ public interface TagDAO {
     boolean addTag(Tag tag);
 
     boolean removeTag(String ISBN, String tagName);
+    
+    boolean removePreviousTags(String ISBN);
 
     ArrayList getTagsByBook(Book book);
 

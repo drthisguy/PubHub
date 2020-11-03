@@ -33,6 +33,17 @@ public class Tag {
     }
 
     public void setTagName(String tagName) {
-        this.tagName = tagName.toLowerCase().trim();
+        this.tagName = capitalizeEachWord(tagName.trim());
     }
+    
+    private String capitalizeEachWord(String str){  
+        String words[]=str.split(" ");  
+        String capitalizeWord="";  
+        for(String w:words) {
+            String first=w.substring(0,1);  
+            String afterfirst=w.substring(1);  
+            capitalizeWord+=first.toUpperCase()+afterfirst+" ";  
+        }  
+        return capitalizeWord.trim();  
+    }  
 }

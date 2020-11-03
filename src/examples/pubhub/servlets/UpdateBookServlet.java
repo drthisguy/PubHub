@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import examples.pubhub.dao.BookDAO;
+import examples.pubhub.dao.TagDAO;
 import examples.pubhub.model.Book;
+import examples.pubhub.model.Tag;
 import examples.pubhub.utilities.DAOUtilities;
 
 /**
@@ -26,27 +28,50 @@ public class UpdateBookServlet extends HttpServlet {
 		boolean isSuccess= false;
 		String isbn13 = request.getParameter("isbn13");
 		
-		BookDAO dao = DAOUtilities.getBookDAO();
-		Book book = dao.getBookByISBN(isbn13);
+		BookDAO bookDB = DAOUtilities.getBookDAO();
+		TagDAO tagsDB = DAOUtilities.getTagDAO(); 
+		Book book = bookDB.getBookByISBN(isbn13);
 		
-		if(book != null){
+		if(book != null) {
 			// The only fields we want to be updatable are title, author and price. A new ISBN has to be applied for
 			// And a new edition of a book needs to be re-published.
 			book.setTitle(request.getParameter("title"));
 			book.setAuthor(request.getParameter("author"));
 			book.setPrice(Double.parseDouble(request.getParameter("price")));
 			request.setAttribute("book", book);
-			isSuccess = dao.updateBook(book);
-		}else {
+			
+			isSuccess = bookDB.updateBook(book);
+		} else {
 			//ASSERT: couldn't find book with isbn. Update failed.
 			isSuccess = false;
 		}
 		
 		if(isSuccess){
-			request.getSession().setAttribute("message", "Book successfully updated");
-			request.getSession().setAttribute("messageClass", "alert-success");
+			String message = book.getTitle()+" updated successfully";
+			String messageClass = "alert-success";
+			String[] tags = request.getParameter("tags").split(",");
+			
+			boolean areRemoved = tagsDB.removePreviousTags(isbn13);
+			if (areRemoved) {
+				for (String str : tags) {
+					
+					Tag tag = new Tag(isbn13, str);
+					boolean tagAdded = tagsDB.addTag(tag);
+					
+					if (!tagAdded) {
+						message = book.getTitle()+" updated. However, one or more tags may have failed to update";
+						messageClass = "alert-warning";
+					}
+				}
+			} else {
+				message = "Failed to update any tags for "+ book.getTitle();
+				messageClass = "alert-warning";
+			}
+					
+			request.getSession().setAttribute("message", message);
+			request.getSession().setAttribute("messageClass", messageClass);
 			response.sendRedirect("ViewBookDetails?isbn13=" + isbn13);
-		}else {
+		} else {
 			request.getSession().setAttribute("message", "There was a problem updating this book");
 			request.getSession().setAttribute("messageClass", "alert-danger");
 			request.getRequestDispatcher("bookDetails.jsp").forward(request, response);
