@@ -13,8 +13,8 @@ public interface TagDAO {
     
     boolean removePreviousTags(String ISBN);
 
-    ArrayList getTagsByBook(Book book);
+    ArrayList<String> getTagsByBook(Book book);
 
-    List getBooksByTagName(String tagName);
+    List<Book> getBooksByTagName(String tagName);
 
 }

@@ -48,17 +48,17 @@ public class UpdateBookServlet extends HttpServlet {
 			isSuccess = false;
 		}
 		
-		if(isSuccess){
+		if(isSuccess) {
 			String message = book.getTitle()+" updated successfully";
 			String messageClass = "alert-success";
 			String[] tags = request.getParameter("tags").split(",");
-			ArrayList<Tag> previousTags = tagsDB.getTagsByBook(book);
+			ArrayList<String> previousTags = tagsDB.getTagsByBook(book);
 			
-			boolean hasPreviousTags = (previousTags.size() > 0);
 			boolean areRemoved = tagsDB.removePreviousTags(isbn13);
+			boolean hasNoPreviousTags = (previousTags.size() == 0);
 			
-			//Each one of these conditions must be true if the other is false. 
-			if (areRemoved ^ !hasPreviousTags) {
+			//Hold that each one of these conditions must be true when (and only when) the other is false.
+			if (areRemoved ^ hasNoPreviousTags) {
 				for (String str : tags) {
 					
 					Tag tag = new Tag(isbn13, str);

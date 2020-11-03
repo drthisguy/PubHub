@@ -4,8 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -90,7 +88,7 @@ public class PublishBookServlet extends HttpServlet {
 			boolean isSuccess = database.addBook(book);
 			
 			if(isSuccess){
-				String message = "Book successfully published";
+				String message = book.getTitle() + " successfully published";
 				String messageClass = "alert-success";
 				
 				for (String str : tags) {
@@ -99,7 +97,7 @@ public class PublishBookServlet extends HttpServlet {
 					boolean tagAdded = tagsDB.addTag(tag);
 					
 					if (!tagAdded) {
-						message = "Book published. However, adding one or more tags may have failed";
+						message = book.getTitle() + " published. However, adding one or more tags may have failed";
 						messageClass = "alert-warning";
 					}
 				}
@@ -115,7 +113,7 @@ public class PublishBookServlet extends HttpServlet {
 				// could result in duplicate rows in a database.
 				resp.sendRedirect(req.getContextPath() + "/BookPublishing");
 			} else {
-				req.getSession().setAttribute("message", "There was a problem publishing the book");
+				req.getSession().setAttribute("message", "There was a problem publishing this book");
 				req.getSession().setAttribute("messageClass", "alert-danger");
 				req.getRequestDispatcher("publishBook.jsp").forward(req, resp);
 				
