@@ -20,7 +20,7 @@
 	</c:when>
 	</c:choose>
 	
-		<h1>PUBHUB <small>Book Publishing</small></h1>
+		<h1>PUBHUB </h1><h2 style="color:#b3422b;font-size: 120%;">Lookup titles by their book tags</h2>
 		<hr class="book-primary">
 
 		<table class="table table-striped table-hover table-responsive pubhub-datatable">

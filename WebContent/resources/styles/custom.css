@@ -18,6 +18,11 @@ body {
 	color: #f5f5f5;
 }
 
+.subTxt {
+	color: #b3422b;
+	font-size: 86%;
+}
+
 #marketplace-navbar{
 	top:110px;
 	position: fixed;
@@ -28,6 +33,7 @@ body {
 .showingTotal {
 	text-align: center;
 }
+
 
 /* To get Bootstrap's Nav Dropdown to expand on hover */
 /* .dropdown:hover .dropdown-menu { */
