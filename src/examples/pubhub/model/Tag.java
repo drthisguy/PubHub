@@ -37,7 +37,7 @@ public class Tag {
     }
     
     private String capitalizeEachWord(String str){  
-        String words[]=str.split(" ");  
+        String words[]=str.split("\\s");  
         String capitalizeWord="";  
         for(String w:words) {
             String first=w.substring(0,1);  

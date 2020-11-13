@@ -20,4 +20,14 @@
     <exception-type>java.lang.Throwable</exception-type>
     <location>/error.jsp</location>
   </error-page>
+  <servlet>
+    <description>Search by book tags</description>
+    <display-name>SearchTagServlet</display-name>
+    <servlet-name>SearchtagServlet</servlet-name>
+    <servlet-class>examples.pubhub.servlets.SearchTagServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchTagServlet</servlet-name>
+    <url-pattern>/TagSearch</url-pattern>
+  </servlet-mapping>
 </web-app>

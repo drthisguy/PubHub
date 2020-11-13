@@ -1,6 +1,7 @@
 package examples.pubhub.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
@@ -8,6 +9,7 @@ public class Book {
 	private String isbn13;			// International Standard Book Number, unique
 	private String title;
 	private String author;
+	private String tags;
 	private LocalDate publishDate;	// Date of publish to the website
 	
 	private double price;
@@ -39,6 +41,10 @@ public class Book {
 		this.author = null;
 		this.publishDate = LocalDate.now();
 		this.content = null;
+	}
+	
+	public void merge(String tags) {
+		this.setTags(tags);
 	}
 	
 	public String getIsbn13() {
@@ -87,6 +93,14 @@ public class Book {
 
 	public void setContent(byte[] content) {
 		this.content = content;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 	
 	
