@@ -1,16 +1,11 @@
 package examples.pubhub.dao;
 
-import java.sql.Blob;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import examples.pubhub.model.Book;
 import examples.pubhub.utilities.DAOUtilities;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implementation for the BookDAO, responsible for querying the database for Book objects.

@@ -88,7 +88,7 @@ public class PublishBookServlet extends HttpServlet {
 			boolean isSuccess = database.addBook(book);
 			
 			if(isSuccess){
-				String message = book.getTitle() + " successfully published";
+				String message = book.getTitle() + " published successfully";
 				String messageClass = "alert-success";
 				
 				for (String str : tags) {

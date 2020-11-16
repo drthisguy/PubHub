@@ -2,7 +2,6 @@ package examples.pubhub.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Book {
 
@@ -48,7 +47,7 @@ public class Book {
 		
 		if (tagList.size() > 0) {
 			
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			
 			for (String str : tagList) {
 		         sb.append(str);

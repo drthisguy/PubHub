@@ -29,11 +29,6 @@ body {
 	text-align: center;
 }
 
-.tag-search {
-	float: right;
-	color: red;
-}
-
 /* To get Bootstrap's Nav Dropdown to expand on hover */
 /* .dropdown:hover .dropdown-menu { */
 /* 	display: block; */
