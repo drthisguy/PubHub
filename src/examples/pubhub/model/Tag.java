@@ -7,7 +7,7 @@ public class Tag {
 
     public Tag(String isbn13, String tagName) {
         this.isbn13 = isbn13;
-        this.tagName = tagName;
+        this.tagName = capitalizeEachWord(tagName.trim());
     }
 
     @Override
@@ -16,7 +16,7 @@ public class Tag {
     }
 
     private String capitalizeEachWord(String str){
-        String[] words = str.split("\\s");
+    	String words[]=str.split("\\s"); 
         String capitalizedWord="";
         for(String w:words){
             String first=w.substring(0,1);
@@ -32,10 +32,6 @@ public class Tag {
 
     public String getTagName() {
         return tagName;
-    }
-
-    public void setTagName(String tagName) {
-        this.tagName = capitalizeEachWord(tagName.trim());
     }
 
 }
