@@ -33,7 +33,6 @@ public class ViewBookDetailsServlet extends HttpServlet {
 		// Otherwise it won't know what details to display. Ergo, we need to fetch those details before we
 		// Actually redirect the user.
 		String isbn13 = request.getParameter("isbn13");
-		String tags = "";
 		
 		BookDAO bookDAO = DAOUtilities.getBookDAO();
 		Book book = bookDAO.getBookByISBN(isbn13);
@@ -42,20 +41,10 @@ public class ViewBookDetailsServlet extends HttpServlet {
 		TagDAO tagDAO = DAOUtilities.getTagDAO();
 		ArrayList<String> tagList = tagDAO.getTagsByBook(book);
 		
-		if (tagList.size() > 0) {
-		
-			StringBuffer sb = new StringBuffer();
-			
-			for (String str : tagList) {
-		         sb.append(str);
-		         sb.append(", ");
-		      }
-			//print tag names and remove last appendage;
-			tags += sb.toString().substring(0, sb.length() - 2); 
-		}
+		//Add book tags to the field of this book before forwarding.
+		book.setTags(tagList);
 		
 		request.setAttribute("book", book);
-		request.setAttribute("tags", tags);
 		
 		// We can use a forward here, because if a user wants to refresh their browser on this page,
 		// it will just show them the most recent details for their book. There's no risk of data

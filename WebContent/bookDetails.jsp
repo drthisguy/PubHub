@@ -48,7 +48,7 @@
 		   <div class="form-group">
 		    <label for="tags" class="col-sm-4 control-label">Tags (Comma Separated)</label>
 		    <div class="col-sm-5">
-		      <input type="text" class="form-control" id="tags" name="tags" placeholder="Sci-Fi,   Adventure,   ...etc." value="${tags }" />
+		      <input type="text" class="form-control" id="tags" name="tags" placeholder="Sci-Fi,   Adventure,   ...etc." value="${book.tags }" />
 		    </div>
 		  </div>
 		  <div class="form-group">

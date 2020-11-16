@@ -31,23 +31,11 @@ public class SearchTagServlet extends HttpServlet {
 		
 		TagDAO tagDAO = DAOUtilities.getTagDAO();
 		
-		//Add book tags to the field of each book instance to be forwarded.
+		//Add book tags to the field of each book instance before forwarding.
 		for (Book book : bookList) {
-			ArrayList<String> tagList = tagDAO.getTagsByBook(book);
-			String tags = "";
 			
-			if (tagList.size() > 0) {
-				
-				StringBuffer sb = new StringBuffer();
-				
-				for (String str : tagList) {
-			         sb.append(str);
-			         sb.append(", ");
-			      }
-				//print tag names and remove last appendage;
-				tags += sb.toString().substring(0, sb.length() - 2); 
-			}
-			book.merge(tags);
+			ArrayList<String> tagList = tagDAO.getTagsByBook(book);
+			book.setTags(tagList);
 		}
 
 		// Populate the list into a variable that will be stored in the session

@@ -43,9 +43,23 @@ public class Book {
 		this.content = null;
 	}
 	
-	public void merge(String tags) {
-		this.setTags(tags);
+	private String stringifyTags(ArrayList<String> tagList) {
+		String tags = "";
+		
+		if (tagList.size() > 0) {
+			
+			StringBuffer sb = new StringBuffer();
+			
+			for (String str : tagList) {
+		         sb.append(str);
+		         sb.append(", ");
+		      }
+			//print tag names and remove last appendage;
+			tags += sb.toString().substring(0, sb.length() - 2); 
+		}
+		return tags;		
 	}
+	
 	
 	public String getIsbn13() {
 		return isbn13;
@@ -69,6 +83,14 @@ public class Book {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+	
+	public String getTags() {
+		return tags;
+	}
+	
+	public void setTags(ArrayList<String> tags) {
+		this.tags = this.stringifyTags(tags);
 	}
 
 	public LocalDate getPublishDate() {
@@ -94,14 +116,5 @@ public class Book {
 	public void setContent(byte[] content) {
 		this.content = content;
 	}
-
-	public String getTags() {
-		return tags;
-	}
-
-	public void setTags(String tags) {
-		this.tags = tags;
-	}
-	
 	
 }

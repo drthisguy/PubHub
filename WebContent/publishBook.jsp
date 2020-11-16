@@ -53,14 +53,12 @@
 		      <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Price" required="required" value="${param.price }" />
 		    </div>
 		  </div>
-		  
 		   <div class="form-group">
-		    <label for="tags" class="col-sm-4 control-label">Tags (Coma Separated)</label>
+		    <label for="tags" class="col-sm-4 control-label">Tags (Comma Separated)</label>
 		    <div class="col-sm-5">
 		      <input type="text" class="form-control" id="tags" name="tags" placeholder="Sci-Fi,   Adventure,   ..." value="${param.tags }" />
 		    </div>
 		  </div>
-		  
 		  <div class="form-group">
 		    <label for="content" class="col-sm-4 control-label">Content</label>
 		    <div class="col-sm-5">

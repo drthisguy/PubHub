@@ -22,6 +22,8 @@
 	
 		<h1>PUBHUB <small>Book Publishing</small></h1>
 		<hr class="book-primary">
+		
+		<p><a style="color:#2c3e50;font-size: 80%; float:right" href="TagSearch">Search Book Tags</a></p>
 
 		<table class="table table-striped table-hover table-responsive pubhub-datatable">
 			<thead>
