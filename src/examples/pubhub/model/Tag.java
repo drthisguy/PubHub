@@ -1,8 +1,8 @@
 package examples.pubhub.model;
 
 public class Tag {
-    private String isbn13;
-    private String tagName;
+    private final String isbn13;
+    private final String tagName;
 
 
     public Tag(String isbn13, String tagName) {
@@ -16,14 +16,14 @@ public class Tag {
     }
 
     private String capitalizeEachWord(String str){
-    	String words[]=str.split("\\s"); 
-        String capitalizedWord="";
-        for(String w:words){
+    	String[] words = str.split("\\s");
+        StringBuilder capitalizedWord = new StringBuilder();
+        for(String w : words){
             String first=w.substring(0,1);
             String afterFirst=w.substring(1);
-            capitalizedWord+= first.toUpperCase() + afterFirst + " ";
+            capitalizedWord.append(first.toUpperCase()).append(afterFirst).append(" ");
         }
-        return capitalizedWord.trim();
+        return capitalizedWord.toString().trim();
     }
 
     public String getIsbn13() {
